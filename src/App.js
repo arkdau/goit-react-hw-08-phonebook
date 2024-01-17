@@ -1,5 +1,4 @@
 import { Route, Routes } from "react-router-dom";
-import Layout from "./components/Layout/Layout";
 import Login from "./pages/Login/Login";
 // import Tasks from "./pages/Tasks/Tasks";
 import Home from "./pages/Home/Home";
@@ -10,8 +9,9 @@ import { RestrictedRoute } from "./components/RestrictedRoute/RestrictedRoute";
 import Register from "./pages/Register/Register";
 import { PrivatedRoute } from "./components/PrivateRoute/PrivatedRoute";
 import { selectIsRefreshing } from "./redux/auth/selectors";
-import ContactList from "pages/ContactList/ContactList";
+// import ContactList from "pages/ContactList/ContactList";
 import Tasks from "pages/Tasks/Tasks";
+import UserMenu from "components/UserMenu/UserMenu";
 
 function App() {
   const dispatch = useDispatch();
@@ -28,7 +28,7 @@ function App() {
   return (
     <div className="App">
       <Routes>
-        <Route path="/" element={<Layout />}>
+        <Route path="/" element={<UserMenu />}>
           <Route index element={<Home />} />
           {
             /*<Route

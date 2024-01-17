@@ -31,7 +31,7 @@ const AuthorizedNav = () => {
   );
 };
 
-const Layout = () => {
+const UserMenu = () => {
   const isLoggedIn = useSelector(selectIsLoggedIn);
 
   return (
@@ -42,4 +42,4 @@ const Layout = () => {
   );
 };
 
-export default Layout;
+export default UserMenu;
