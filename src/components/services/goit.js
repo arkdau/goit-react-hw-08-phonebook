@@ -1,4 +1,6 @@
-const BASE_API_URL = "https://goit-task-manager.herokuapp.com";
+// const BASE_API_URL = "https://goit-task-manager.herokuapp.com";
+const BASE_API_URL = "https://connections-api.herokuapp.com";
+
 let BASE_API_TOKEN;
 
 export const setAuthorizationToken = (token) => {
@@ -49,6 +51,7 @@ export async function getData(url_enpoint = "") {
     }
     const data = await response.json();
     // debugger;
+    console.log("getData-data: ", data);
     return data;
   } catch (error) {
     console.error(
@@ -96,13 +99,14 @@ export async function postData(url_enpoint = "", data = {}) {
 ////////////////////// - DELETE method implementation:
 
 export async function deleteData(url_enpoint = "", id = "") {
-  const url = `${BASE_API_URL}/${url_enpoint}/${id}`;
+  const url = `${BASE_API_URL}/${url_enpoint}${id}`;
 
   const options = {
     timeout: 6000,
     method: "DELETE",
     headers: {
       accept: "application/json",
+      Authorization: BASE_API_TOKEN,
     },
   };
 

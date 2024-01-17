@@ -1,6 +1,6 @@
 import { Helmet } from "react-helmet";
 import { useDispatch } from "react-redux";
-import { login } from "../../redux/operations";
+import { login } from "../../redux/auth/operations";
 
 const Login = () => {
   const dispatch = useDispatch();

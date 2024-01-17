@@ -3,7 +3,7 @@ import {
   getData,
   postData,
   setAuthorizationToken,
-} from "../components/services/goit";
+} from "../../components/services/goit";
 
 export const register = createAsyncThunk(
   "/users/register",
@@ -44,13 +44,13 @@ export const logout = createAsyncThunk("/users/logout", async (_, thunkAPI) => {
   }
 });
 
-export const me = createAsyncThunk("/users/me", async (_, thunkAPI) => {
+export const current = createAsyncThunk("/users/current", async (_, thunkAPI) => {
   const store = thunkAPI.getState();
   const token = store.auth.token;
   if (token) {
     setAuthorizationToken(token);
     try {
-      const resp = await getData("users/me");
+      const resp = await getData("users/current");
       return resp;
     } catch (err) {
       return thunkAPI.rejectWithValue(err.message);

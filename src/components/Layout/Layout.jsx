@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink, Outlet } from "react-router-dom";
-import { logout } from "../../redux/operations";
-import { selectIsLoggedIn, selectUserName } from "../../redux/selectors";
+import { logout } from "../../redux/auth/operations";
+import { selectIsLoggedIn, selectUserName } from "../../redux/auth/selectors";
 
 const UnauthorizedNav = () => {
   return (
@@ -23,7 +23,8 @@ const AuthorizedNav = () => {
   return (
     <>
       <NavLink to="/">Home</NavLink>
-      <NavLink to="/tasks">Tasks</NavLink>
+      {/*<NavLink to="/tasks">Tasks</NavLink>*/}
+      <NavLink to="/contacts">Contacts</NavLink>
       Welcome {userName}
       <button onClick={handleLogout}>Logout</button>
     </>

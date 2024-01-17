@@ -1,6 +1,6 @@
 import { Helmet } from "react-helmet";
 import { useDispatch } from "react-redux";
-import { register } from "../../redux/operations";
+import { register } from "../../redux/auth/operations";
 import "./Register.module.css";
 
 const Register = () => {
