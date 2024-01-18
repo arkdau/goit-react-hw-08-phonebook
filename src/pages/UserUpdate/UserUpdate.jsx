@@ -5,32 +5,27 @@ import "./Register.module.css";
 
 const Register = () => {
   const dispatch = useDispatch();
-  const handleRegistration = (event) => {
+  const handleUpdate = (event) => {
     event.preventDefault();
-    // const target = event.target;
-    // const currentTarget = event.currentTarget;
     const name = event.target.username.value;
     const email = event.target.email.value;
     const password = event.target.password.value;
 
-    // console.log("register-tareget: ", target);
-    // console.log("register-CurrTareget: ", currentTarget);
-
-       dispatch(register({
-        name,
-        email,
-        password,
-      }));
+    dispatch(register({
+      name,
+      email,
+      password,
+    }));
   };
 
   return (
     <div>
       <Helmet>
-        <title>Register</title>
+        <title>User Update</title>
         {/*<link rel="canonical" href="http://" />*/}
       </Helmet>
 
-      <form onSubmit={handleRegistration}>
+      <form onSubmit={handleUpdate}>
         <label>Username</label>
         <input name="username" />
 
@@ -40,7 +35,7 @@ const Register = () => {
         <label>Password</label>
         <input name="password" type="password" autoComplete="off" />
 
-        <button type="submit">Register</button>
+        <button type="submit">Update</button>
       </form>
     </div>
   );

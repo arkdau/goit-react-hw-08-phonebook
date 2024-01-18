@@ -11,13 +11,27 @@ import { PrivatedRoute } from "./components/PrivateRoute/PrivatedRoute";
 import { selectIsRefreshing } from "./redux/auth/selectors";
 // import ContactList from "pages/ContactList/ContactList";
 import Tasks from "pages/Tasks/Tasks";
-import UserMenu from "components/UserMenu/UserMenu";
+import UserMenu from "components/MenuAppBar/MenuAppBar";
+// import {
+//   Admin,
+//   EditGuesser,
+//   ListGuesser,
+//   Resource,
+//   ShowGuesser,
+// } from "react-admin";
+import "@fontsource/roboto/300.css";
+import "@fontsource/roboto/400.css";
+import "@fontsource/roboto/500.css";
+import "@fontsource/roboto/700.css";
+import CssBaseline from "@mui/material/CssBaseline";
 
 function App() {
   const dispatch = useDispatch();
+  const { contacts } = useSelector((state) => state.contacts);
 
   useEffect(() => {
     dispatch(current());
+    console.log("current: ", contacts);
     // eslint-disable-next-line
   }, []);
 
