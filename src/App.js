@@ -24,10 +24,14 @@ import "@fontsource/roboto/400.css";
 import "@fontsource/roboto/500.css";
 import "@fontsource/roboto/700.css";
 import CssBaseline from "@mui/material/CssBaseline";
+import { ThemeProvider } from 'styled-components';
+import { darkTheme, lightTheme } from 'components/styleTheme/theme';
 
 function App() {
   const dispatch = useDispatch();
   const { contacts } = useSelector((state) => state.contacts);
+  // const userTheme = useSelector(selectTheme);
+  const userTheme = "light";
 
   useEffect(() => {
     dispatch(current());
@@ -40,6 +44,7 @@ function App() {
     return <div>Refreshing ...</div>;
   }
   return (
+    <ThemeProvider theme={userTheme === 'dark' ? darkTheme : lightTheme}>
     <div className="App">
       <Routes>
         <Route path="/" element={<UserMenu />}>
@@ -76,6 +81,7 @@ function App() {
         </Route>
       </Routes>
     </div>
+    </ThemeProvider>
   );
 }
 

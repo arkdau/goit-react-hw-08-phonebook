@@ -10,6 +10,7 @@ import Typography from "@mui/material/Typography";
 import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
 import LoginIcon from "@mui/icons-material/Login";
+import LogoutIcon from "@mui/icons-material/Logout";
 import Switch from "@mui/material/Switch";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import FormGroup from "@mui/material/FormGroup";
@@ -18,6 +19,7 @@ import Menu from "@mui/material/Menu";
 
 import BottomNavigation from "@mui/material/BottomNavigation";
 import BottomNavigationAction from "@mui/material/BottomNavigationAction";
+import { Container } from "./MenuAppBar.Styled";
 
 const UnauthorizedNav = () => {
   return (
@@ -29,7 +31,8 @@ const UnauthorizedNav = () => {
       <Box sx={{ flexGrow: 1 }}>
         <AppBar position="static">
           <Toolbar>
-            {/*<IconButton
+            {
+              /*<IconButton
               size="large"
               edge="start"
               color="inherit"
@@ -37,7 +40,8 @@ const UnauthorizedNav = () => {
               sx={{ mr: 2 }}
             >
               <MenuIcon />
-            </IconButton>*/}
+            </IconButton>*/
+            }
             <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
               Phonebook
             </Typography>
@@ -80,44 +84,41 @@ const AuthorizedNav = () => {
       Welcome {userName}
       <button onClick={handleLogout}>Logout</button>
 
-
-
       <Box sx={{ flexGrow: 1 }}>
-  <AppBar position="static">
-    <Toolbar>
-      <IconButton
-        size="large"
-        edge="start"
-        color="inherit"
-        aria-label="menu"
-        sx={{ mr: 2 }}
-      >
-        <MenuIcon />
-      </IconButton>
-      <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-        Contacts
-      </Typography>
+        <AppBar position="static">
+          <Toolbar>
+            <IconButton
+              size="large"
+              edge="start"
+              color="inherit"
+              aria-label="menu"
+              sx={{ mr: 2 }}
+            >
+              <MenuIcon />
+            </IconButton>
+            <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+              Contacts
+            </Typography>
 
-      <NavLink to="/login">
-        <div>
-          <BottomNavigation
-            // sx={{ width: 500 }}
-            sx={{ bgcolor: "inherit", color: "white" }}
-            // value={value}
-            // onChange={}
-          >
-            <BottomNavigationAction
-              label="Login"
-              value="login"
-              icon={<LoginIcon sx={{ color: "white" }} />}
-            />
-          </BottomNavigation>
-        </div>
-      </NavLink>
-    </Toolbar>
-  </AppBar>
-</Box>
-
+            {/*<NavLink to="/login">*/}
+            <div>
+              <BottomNavigation
+                // sx={{ width: 500 }}
+                sx={{ bgcolor: "inherit", color: "white" }}
+                // value={value}
+                onClick={handleLogout}
+              >
+                <BottomNavigationAction
+                  label="Logout"
+                  value="logout"
+                  icon={<LogoutIcon sx={{ color: "white" }} />}
+                />
+              </BottomNavigation>
+            </div>
+            {/*</NavLink>*/}
+          </Toolbar>
+        </AppBar>
+      </Box>
     </>
   );
 };
@@ -126,10 +127,10 @@ const MenuAppBar = () => {
   const isLoggedIn = useSelector(selectIsLoggedIn);
 
   return (
-    <div>
+    <Container>
       {isLoggedIn ? <AuthorizedNav /> : <UnauthorizedNav />}
       <Outlet />
-    </div>
+    </Container>
   );
 };
 

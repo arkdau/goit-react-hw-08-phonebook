@@ -27,18 +27,18 @@ const Tasks = () => {
       </Helmet>
 
       <div
-        style={{
-          minHeight: "200px",
-          margin: "30px auto",
-          boxSizing: "border-box",
-          backgroundColor: "lightblue",
-          padding: "10px",
-        }}
+        // style={{
+        //   minHeight: "200px",
+        //   margin: "30px auto",
+        //   boxSizing: "border-box",
+        //   backgroundColor: "lightblue",
+        //   padding: "10px",
+        // }}
       >
         <Header>
           <h2>Phonebook</h2>
         </Header>
-        <ContactForm />
+        {/*<ContactForm />*/}
 
         <Header>
           <h2>Contacts</h2>
