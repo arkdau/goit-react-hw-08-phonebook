@@ -12,6 +12,7 @@ import { selectIsRefreshing } from "./redux/auth/selectors";
 // import ContactList from "pages/ContactList/ContactList";
 import Tasks from "pages/Tasks/Tasks";
 import UserMenu from "components/MenuAppBar/MenuAppBar";
+import NewContact from "./pages/ContactForm/ContactForm";
 // import {
 //   Admin,
 //   EditGuesser,
@@ -24,8 +25,8 @@ import "@fontsource/roboto/400.css";
 import "@fontsource/roboto/500.css";
 import "@fontsource/roboto/700.css";
 import CssBaseline from "@mui/material/CssBaseline";
-import { ThemeProvider } from 'styled-components';
-import { darkTheme, lightTheme } from 'components/styleTheme/theme';
+import { ThemeProvider } from "styled-components";
+import { darkTheme, lightTheme } from "components/styleTheme/theme";
 
 function App() {
   const dispatch = useDispatch();
@@ -44,13 +45,13 @@ function App() {
     return <div>Refreshing ...</div>;
   }
   return (
-    <ThemeProvider theme={userTheme === 'dark' ? darkTheme : lightTheme}>
-    <div className="App">
-      <Routes>
-        <Route path="/" element={<UserMenu />}>
-          <Route index element={<Home />} />
-          {
-            /*<Route
+    <ThemeProvider theme={userTheme === "dark" ? darkTheme : lightTheme}>
+      <div className="App">
+        <Routes>
+          <Route path="/" element={<UserMenu />}>
+            <Route index element={<Home />} />
+            {
+              /*<Route
             path="register"
             element={<RestrictedRoute component={Register} path="/tasks" />}
           />
@@ -58,29 +59,37 @@ function App() {
             path="login"
             element={<RestrictedRoute component={Login} path="/tasks" />}
           />*/
-          }
-          <Route
-            path="register"
-            element={<RestrictedRoute component={Register} path="/contacts" />}
-          />
-          <Route
-            path="login"
-            element={<RestrictedRoute component={Login} path="/contacts" />}
-          />
+            }
+            <Route
+              path="register"
+              element={
+                <RestrictedRoute component={Register} path="/contacts" />
+              }
+            />
+            <Route
+              path="login"
+              element={<RestrictedRoute component={Login} path="/contacts" />}
+            />
 
-          {
-            /*<Route
+            {
+              /*<Route
             path="tasks"
             element={<PrivatedRoute component={Tasks} path="/login"  />}
           />*/
-          }
-          <Route
-            path="contacts"
-            element={<PrivatedRoute component={Tasks} path="/login" />}
-          />
-        </Route>
-      </Routes>
-    </div>
+            }
+            <Route
+              path="contacts"
+              element={<PrivatedRoute component={Tasks} path="/login" />}
+            />
+            <Route
+              path="new-contact"
+              element={
+                <PrivatedRoute component={NewContact} path="/new-contact" />
+              }
+            />
+          </Route>
+        </Routes>
+      </div>
     </ThemeProvider>
   );
 }

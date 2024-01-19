@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import { setStatusFilter } from "./../../redux/contacts/operations";
-import { NavLink, Outlet, RouterLink } from "react-router-dom";
+import { NavLink, Outlet, RouterLink, useNavigate } from "react-router-dom";
 import { logout } from "../../redux/auth/operations";
 import { selectIsLoggedIn, selectUserName } from "../../redux/auth/selectors";
 import * as React from "react";
@@ -24,6 +24,10 @@ import BottomNavigationAction from "@mui/material/BottomNavigationAction";
 import { Container } from "./MenuAppBar.Styled";
 import { alpha, styled } from "@mui/material/styles";
 import InputBase from "@mui/material/InputBase";
+import { menuItemClasses } from "@mui/base";
+
+const settingsUnAuth = ["Home", "Contacts", "Register"];
+const settingsAuth = ["Home", "Contacts", "New contact"];
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -66,6 +70,54 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 
 const UnauthorizedNav = () => {
+  const dispatch = useDispatch();
+  const nav = useNavigate();
+  let menuItem="";
+  const handleChangeInput = (evt) => {
+    evt.preventDefault();
+    const filter = evt.currentTarget.value;
+    // setFilter(filter);
+    dispatch(setStatusFilter(filter));
+  };
+
+  const [anchorElNav, setAnchorElNav] = React.useState(null);
+  const [anchorElUser, setAnchorElUser] = React.useState(null);
+
+  const handleOpenNavMenu = (event) => {
+    setAnchorElNav(event.currentTarget);
+  };
+  const handleOpenUserMenu = (event) => {
+    setAnchorElUser(event.currentTarget);
+  };
+
+  const handleCloseNavMenu = () => {
+    setAnchorElNav(null);
+  };
+
+  const handleCloseUserMenu = (evt) => {
+    evt.preventDefault();
+    setAnchorElUser(null);
+    menuItem = evt.currentTarget.textContent;
+    console.log("handleCloseUserMenu: ", evt.currentTarget.textContent);
+    switch (menuItem) {
+      case "Home":
+        nav("/");
+        break;
+      case "Contacts":
+        nav("/contacts");
+        break;
+      case "Register":
+        nav("/register");
+        break;
+      case "New contact":
+        nav("/login");
+        break;
+
+      default:
+        break;
+    }
+  };
+
   return (
     <>
       <NavLink to="/">Home</NavLink>
@@ -75,19 +127,43 @@ const UnauthorizedNav = () => {
       <Box sx={{ flexGrow: 1 }}>
         <AppBar position="static">
           <Toolbar>
-            {
-              /*<IconButton
-              size="large"
-              edge="start"
-              color="inherit"
-              aria-label="menu"
-              sx={{ mr: 2 }}
-            >
-              <MenuIcon />
-            </IconButton>*/
-            }
+            <Box sx={{ flexGrow: 0 }}>
+              <IconButton
+                size="large"
+                edge="start"
+                color="inherit"
+                aria-label="menu"
+                sx={{ mr: 2 }}
+                onClick={handleOpenUserMenu}
+              >
+                <MenuIcon />
+              </IconButton>
+              <Menu
+                sx={{ mt: "45px" }}
+                id="menu-appbar"
+                anchorEl={anchorElUser}
+                anchorOrigin={{
+                  vertical: "top",
+                  horizontal: "right",
+                }}
+                keepMounted
+                transformOrigin={{
+                  vertical: "top",
+                  horizontal: "right",
+                }}
+                open={Boolean(anchorElUser)}
+                onClose={handleCloseUserMenu}
+              >
+                {settingsUnAuth.map((setting) => (
+                  <MenuItem key={setting} onClick={handleCloseUserMenu}>
+                    <Typography textAlign="center">{setting}</Typography>
+                  </MenuItem>
+                ))}
+              </Menu>
+            </Box>
+
             <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-              Phonebook
+              {menuItem}
             </Typography>
 
             <NavLink to="/login">
@@ -116,17 +192,53 @@ const UnauthorizedNav = () => {
 const AuthorizedNav = () => {
   const userName = useSelector(selectUserName);
   const dispatch = useDispatch();
+  const nav = useNavigate();
+  let menuItem;
   const handleLogout = () => {
     dispatch(logout());
   };
 
   const handleChangeInput = (evt) => {
-  evt.preventDefault();
-  const filter = evt.currentTarget.value;
-  // setFilter(filter);
-  dispatch(setStatusFilter(filter));
-};
+    evt.preventDefault();
+    const filter = evt.currentTarget.value;
+    // setFilter(filter);
+    dispatch(setStatusFilter(filter));
+  };
 
+  const [anchorElNav, setAnchorElNav] = React.useState(null);
+  const [anchorElUser, setAnchorElUser] = React.useState(null);
+
+  const handleOpenNavMenu = (event) => {
+    setAnchorElNav(event.currentTarget);
+  };
+  const handleOpenUserMenu = (event) => {
+    setAnchorElUser(event.currentTarget);
+  };
+
+  const handleCloseNavMenu = () => {
+    setAnchorElNav(null);
+  };
+
+  const handleCloseUserMenu = (evt) => {
+    evt.preventDefault();
+    setAnchorElUser(null);
+    menuItem = evt.currentTarget.textContent;
+    console.log("handleCloseUserMenu: ", evt.currentTarget.textContent);
+    switch (menuItem) {
+      case "Home":
+        nav("/");
+        break;
+      case "Contacts":
+        nav("/contacts");
+        break;
+      case "New contact":
+        nav("/new-contact");
+        break;
+
+      default:
+        break;
+    }
+  };
 
   return (
     <>
@@ -139,17 +251,42 @@ const AuthorizedNav = () => {
       <Box sx={{ flexGrow: 1 }}>
         <AppBar position="static" color="secondary" enableColorOnDark={true}>
           <Toolbar>
-            <IconButton
-              size="large"
-              edge="start"
-              color="inherit"
-              aria-label="menu"
-              sx={{ mr: 2 }}
-            >
-              <MenuIcon />
-            </IconButton>
+            <Box sx={{ flexGrow: 0 }}>
+              <IconButton
+                size="large"
+                edge="start"
+                color="inherit"
+                aria-label="menu"
+                sx={{ mr: 2 }}
+                onClick={handleOpenUserMenu}
+              >
+                <MenuIcon />
+              </IconButton>
+              <Menu
+                sx={{ mt: "45px" }}
+                id="menu-appbar"
+                anchorEl={anchorElUser}
+                anchorOrigin={{
+                  vertical: "top",
+                  horizontal: "right",
+                }}
+                keepMounted
+                transformOrigin={{
+                  vertical: "top",
+                  horizontal: "right",
+                }}
+                open={Boolean(anchorElUser)}
+                onClose={handleCloseUserMenu}
+              >
+                {settingsAuth.map((setting) => (
+                  <MenuItem key={setting} onClick={handleCloseUserMenu}>
+                    <Typography textAlign="center">{setting}</Typography>
+                  </MenuItem>
+                ))}
+              </Menu>
+            </Box>
             <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-              Contacts
+              {menuItem}
             </Typography>
             <Search>
               <SearchIconWrapper>
