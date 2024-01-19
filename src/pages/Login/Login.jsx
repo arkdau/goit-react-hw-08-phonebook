@@ -16,6 +16,7 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { NavLink, useNavigate } from "react-router-dom";
 
 function Copyright(props) {
   return (
@@ -41,6 +42,7 @@ function Copyright(props) {
 
 const Login = () => {
   const dispatch = useDispatch();
+  const nav = useNavigate();
   // const handleLogin = (event) => {
   //   event.preventDefault();
   //   const email = event.target.email.value;
@@ -56,8 +58,8 @@ const Login = () => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     dispatch(login({
-      email: data.get('email'),
-      password: data.get('password'),
+      email: data.get("email"),
+      password: data.get("password"),
     }));
   };
 
@@ -68,7 +70,8 @@ const Login = () => {
         {/*<link rel="canonical" href="http://" />*/}
       </Helmet>
 
-      {/*<form onSubmit={handleLogin}>
+      {
+        /*<form onSubmit={handleLogin}>
         <label>Email</label>
         <input name="email" type="email" />
 
@@ -76,27 +79,32 @@ const Login = () => {
         <input name="password" type="password" autoComplete="off" />
 
         <button type="submit">Login</button>
-      </form>*/}
+      </form>*/
+      }
 
-
-    {/*<ThemeProvider theme={defaultTheme}>*/}
+      {/*<ThemeProvider theme={defaultTheme}>*/}
       <Container component="main" maxWidth="xs">
         <CssBaseline />
         <Box
           sx={{
             marginTop: 8,
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
           }}
         >
-          <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
+          <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
             Sign in
           </Typography>
-          <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
+          <Box
+            component="form"
+            onSubmit={handleSubmit}
+            noValidate
+            sx={{ mt: 1 }}
+          >
             <TextField
               margin="normal"
               required
@@ -136,17 +144,18 @@ const Login = () => {
                 </Link>
               </Grid>
               <Grid item>
-                <Link href="#" variant="body2">
-                  {"Don't have an account? Sign Up"}
-                </Link>
+                <NavLink to="/register">
+                  <Link href="" variant="body2">
+                    {"Don't have an account? Sign Up"}
+                  </Link>
+                </NavLink>
               </Grid>
             </Grid>
           </Box>
         </Box>
         <Copyright sx={{ mt: 8, mb: 4 }} />
       </Container>
-    {/*</ThemeProvider>*/}
-
+      {/*</ThemeProvider>*/}
     </div>
   );
 };

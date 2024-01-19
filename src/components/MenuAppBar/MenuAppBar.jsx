@@ -69,10 +69,12 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }));
 
+let selectMenuItem;
+
 const UnauthorizedNav = () => {
   const dispatch = useDispatch();
   const nav = useNavigate();
-  let menuItem="";
+  // let selectMenuItem ;
   const handleChangeInput = (evt) => {
     evt.preventDefault();
     const filter = evt.currentTarget.value;
@@ -97,9 +99,9 @@ const UnauthorizedNav = () => {
   const handleCloseUserMenu = (evt) => {
     evt.preventDefault();
     setAnchorElUser(null);
-    menuItem = evt.currentTarget.textContent;
-    console.log("handleCloseUserMenu: ", evt.currentTarget.textContent);
-    switch (menuItem) {
+    selectMenuItem = evt.currentTarget.textContent;
+    console.log("handleCloseUserMenu: ", selectMenuItem);
+    switch (selectMenuItem) {
       case "Home":
         nav("/");
         break;
@@ -163,7 +165,7 @@ const UnauthorizedNav = () => {
             </Box>
 
             <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-              {menuItem}
+              {selectMenuItem}
             </Typography>
 
             <NavLink to="/login">
@@ -193,7 +195,8 @@ const AuthorizedNav = () => {
   const userName = useSelector(selectUserName);
   const dispatch = useDispatch();
   const nav = useNavigate();
-  let menuItem;
+  // let selectMenuItem;
+
   const handleLogout = () => {
     dispatch(logout());
   };
@@ -222,9 +225,9 @@ const AuthorizedNav = () => {
   const handleCloseUserMenu = (evt) => {
     evt.preventDefault();
     setAnchorElUser(null);
-    menuItem = evt.currentTarget.textContent;
-    console.log("handleCloseUserMenu: ", evt.currentTarget.textContent);
-    switch (menuItem) {
+    selectMenuItem = evt.currentTarget.textContent;
+    console.log("handleCloseUserMenu: ", selectMenuItem);
+    switch (selectMenuItem) {
       case "Home":
         nav("/");
         break;
@@ -286,7 +289,7 @@ const AuthorizedNav = () => {
               </Menu>
             </Box>
             <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-              {menuItem}
+              {selectMenuItem}
             </Typography>
             <Search>
               <SearchIconWrapper>
