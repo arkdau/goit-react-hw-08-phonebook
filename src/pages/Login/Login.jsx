@@ -16,7 +16,9 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+// import { NavLink, useNavigate } from "react-router-dom";
 import { NavLink, useNavigate } from "react-router-dom";
+import { LinkSpan } from "./Login.Styled";
 
 function Copyright(props) {
   return (
@@ -139,14 +141,14 @@ const Login = () => {
             </Button>
             <Grid container>
               <Grid item xs>
-                <Link href="#" variant="body2">
+                <Link href="#" variant="body2" underline="none">
                   Forgot password?
                 </Link>
               </Grid>
               <Grid item>
                 <NavLink to="/register">
-                  <Link href="" variant="body2">
-                    {"Don't have an account? Sign Up"}
+                  <Link component="button" variant="body2">
+                    "Don't have an account? Sign Up"
                   </Link>
                 </NavLink>
               </Grid>

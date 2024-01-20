@@ -12,7 +12,7 @@ import { selectIsRefreshing } from "./redux/auth/selectors";
 // import ContactList from "pages/ContactList/ContactList";
 import Tasks from "pages/Tasks/Tasks";
 import UserMenu from "components/MenuAppBar/MenuAppBar";
-import NewContact from "./pages/ContactForm/ContactForm";
+import NewContact from "./pages/AddContacts/AddContacts";
 // import {
 //   Admin,
 //   EditGuesser,
@@ -27,6 +27,9 @@ import "@fontsource/roboto/700.css";
 import CssBaseline from "@mui/material/CssBaseline";
 import { ThemeProvider } from "styled-components";
 import { darkTheme, lightTheme } from "components/styleTheme/theme";
+import ContactEdit from "pages/ContactEdit/ContactEdit";
+import ContactDetails from "pages/ContactDetails/ContactDetails";
+import PhoneView from "pages/PhoneView/PhoeneView";
 
 function App() {
   const dispatch = useDispatch();
@@ -70,6 +73,17 @@ function App() {
               path="login"
               element={<RestrictedRoute component={Login} path="/contacts" />}
             />
+
+            <Route
+              path="contacts/:id"
+              element={
+                <PrivatedRoute
+                  component={ContactEdit}
+                />
+              }
+            >
+              {/*<Route path="edit" element={ContactEdit} />*/}
+            </Route>
 
             {
               /*<Route

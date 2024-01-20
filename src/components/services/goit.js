@@ -96,6 +96,43 @@ export async function postData(url_enpoint = "", data = {}) {
   }
 }
 
+
+////////////////////// - PATCH method implementation:
+
+export async function patchData(url_enpoint = "", data = {}) {
+  const url = `${BASE_API_URL}/${url_enpoint}`;
+
+  const options = {
+    timeout: 10000,
+    method: "PATCH",
+    body: JSON.stringify(data),
+    headers: {
+      accept: "application/json",
+      "content-type": "application/json",
+      Authorization: BASE_API_TOKEN,
+    },
+  };
+
+  try {
+    const response = await fetchWithTimeout(url, options);
+    // ok - shorthand for checking that the status is in the range 2xx (boolean)
+    if (!response.ok) {
+      throw new Error(
+        `Network response was not OK - HTTP error: ${response.status}`,
+      );
+    }
+    const data = await response.json();
+    debugger;
+    return data;
+  } catch (error) {
+    console.error(
+      "There has been a problem with your fetch operation:",
+      error.message,
+    );
+  }
+}
+
+
 ////////////////////// - DELETE method implementation:
 
 export async function deleteData(url_enpoint = "", id = "") {

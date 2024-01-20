@@ -77,7 +77,8 @@ const Register = () => {
         {/*<link rel="canonical" href="http://" />*/}
       </Helmet>
 
-      {/*<form onSubmit={handleRegistration}>
+      {
+        /*<form onSubmit={handleRegistration}>
         <label>Username</label>
         <input name="username" />
 
@@ -88,10 +89,10 @@ const Register = () => {
         <input name="password" type="password" autoComplete="off" />
 
         <button type="submit">Register</button>
-      </form>*/}
+      </form>*/
+      }
 
       {/*///////////////////*/}
-
 
       <ThemeProvider theme={defaultTheme}>
         <Container component="main" maxWidth="xs">
@@ -178,9 +179,11 @@ const Register = () => {
               </Button>
               <Grid container justifyContent="flex-end">
                 <Grid item>
-                  <NavLink to="/login"><Link href="#" variant="body2">
-                    Already have an account? Sign in
-                  </Link></NavLink>
+                  <NavLink to="/login">
+                    <Link component="button" variant="body2">
+                      Already have an account? Sign in
+                    </Link>
+                  </NavLink>
                 </Grid>
               </Grid>
             </Box>
@@ -188,7 +191,6 @@ const Register = () => {
           <Copyright sx={{ mt: 5 }} />
         </Container>
       </ThemeProvider>
-
     </div>
   );
 };

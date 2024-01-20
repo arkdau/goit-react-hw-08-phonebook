@@ -1,5 +1,5 @@
 import { createAction, createAsyncThunk } from "@reduxjs/toolkit";
-import { deleteData, getData, postData } from "components/services/goit";
+import { deleteData, getData, patchData, postData } from "components/services/goit";
 
 export const fetchContacts = createAsyncThunk(
   "contacts/fetch",
@@ -39,6 +39,20 @@ export const fetchAddContacts = createAsyncThunk(
     }
   },
 );
+
+export const fetchUpdateContacts = createAsyncThunk(
+  "contacts/fetch/update",
+  async (data, thunkAPI) => {
+    try {
+      console.log("fetchUpdate-id: ", data.id);
+      const resp = await  patchData(`contacts/${data.id}`, data.contact)
+      return resp;
+    } catch (err) {
+      return thunkAPI.rejectWithValue(err.message);
+    }
+  },
+);
+
 
 export const deleteContact = createAction("contact/deleteContact");
 

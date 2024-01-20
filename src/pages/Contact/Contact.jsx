@@ -62,16 +62,16 @@ export const Contact = ({ contact }) => {
   const backLinkLocation = useRef(location.state?.from ?? "/");
 
 
-  // const handleDelete = () => dispatch(fetchDelContacts(contact.id));
+  const handleDelete = () => dispatch(fetchDelContacts(contact.id));
 
-  const handleDelete = () => {
-    const isConfirmed = window.confirm("Delete contact?");
-
-    if (isConfirmed) {
-      dispatch(fetchDelContacts(contact.id));
-      navigate("/");
-    }
-  };
+  // const handleDelete = () => {
+  //   const isConfirmed = window.confirm("Delete contact?");
+  //
+  //   if (isConfirmed) {
+  //     dispatch(fetchDelContacts(contact.id));
+  //     navigate("/");
+  //   }
+  // };
 
   function getRandomHexColor() {
     const letters = "0123456789ABCDEF";
@@ -146,7 +146,7 @@ export const Contact = ({ contact }) => {
               <EditBtn
                 onClick={(e) => {
                   e.stopPropagation();
-                  navigate(`contact/${contact.id}/edit`);
+                  navigate(`${contact.id}`);
                 }}
               >
                 <FiEdit size={25} />
@@ -158,6 +158,7 @@ export const Contact = ({ contact }) => {
                   const isConfirmed = window.confirm("Delete contact?");
                   if (isConfirmed) {
                     // dispatch(removeContact(contact.id));
+                    handleDelete();
                     console.log("dispatch(removeContact(contact.id));");
                   }
                 }}
