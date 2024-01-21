@@ -15,10 +15,7 @@ import Box from "@mui/material/Box";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
-// import { NavLink, useNavigate } from "react-router-dom";
-import { NavLink, useNavigate } from "react-router-dom";
-import { LinkSpan } from "./Login.Styled";
+import { NavLink } from "react-router-dom";
 
 function Copyright(props) {
   return (
@@ -40,21 +37,8 @@ function Copyright(props) {
 
 // TODO remove, this demo shouldn't need to reset the theme.
 
-// const defaultTheme = createTheme();
-
 const Login = () => {
   const dispatch = useDispatch();
-  const nav = useNavigate();
-  // const handleLogin = (event) => {
-  //   event.preventDefault();
-  //   const email = event.target.email.value;
-  //   const password = event.target.password.value;
-  //
-  //   dispatch(login({
-  //     email,
-  //     password,
-  //   }));
-  // };
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -71,18 +55,6 @@ const Login = () => {
         <title>Login</title>
         {/*<link rel="canonical" href="http://" />*/}
       </Helmet>
-
-      {
-        /*<form onSubmit={handleLogin}>
-        <label>Email</label>
-        <input name="email" type="email" />
-
-        <label>Password</label>
-        <input name="password" type="password" autoComplete="off" />
-
-        <button type="submit">Login</button>
-      </form>*/
-      }
 
       {/*<ThemeProvider theme={defaultTheme}>*/}
       <Container component="main" maxWidth="xs">

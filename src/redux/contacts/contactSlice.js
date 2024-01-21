@@ -25,7 +25,6 @@ const contactSlice = createSlice({
         state.isLoading = true;
       })
       .addCase(fetchContacts.fulfilled, (state, action) => {
-        // console.log("action.payload: ", action.payload);
         state.isLoading = false;
         state.error = null;
         state.contacts = action.payload;
@@ -38,8 +37,7 @@ const contactSlice = createSlice({
       .addCase(fetchDelContacts.pending, (state) => {
         state.isDeleting = true;
       })
-      .addCase(fetchDelContacts.fulfilled, (state, action) => {
-        // console.log("action.payload: ", action.payload);
+      .addCase(fetchDelContacts.fulfilled, (state) => {
         state.isDeleting = false;
         state.error = null;
         // return state.contacts.filter((contact) =>
@@ -55,8 +53,7 @@ const contactSlice = createSlice({
       .addCase(fetchAddContacts.pending, (state) => {
         state.isPosting = true;
       })
-      .addCase(fetchAddContacts.fulfilled, (state, action) => {
-        // console.log("action.payload: ", action.payload);
+      .addCase(fetchAddContacts.fulfilled, (state) => {
         state.isPosting = false;
         state.error = null;
         // return state.contacts.filter((contact) =>
@@ -72,8 +69,7 @@ const contactSlice = createSlice({
   .addCase(fetchUpdateContacts.pending, (state) => {
     state.isPosting = true;
   })
-  .addCase(fetchUpdateContacts.fulfilled, (state, action) => {
-    // console.log("action.payload: ", action.payload);
+  .addCase(fetchUpdateContacts.fulfilled, (state) => {
     state.isPosting = false;
     state.error = null;
     // return state.contacts.filter((contact) =>

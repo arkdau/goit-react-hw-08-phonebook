@@ -5,7 +5,6 @@ let BASE_API_TOKEN;
 
 export const setAuthorizationToken = (token) => {
   BASE_API_TOKEN = token ? `Bearer ${token}` : "";
-  console.log("BASE_API_TOKEN: ", BASE_API_TOKEN);
 };
 
 export const getAuthorizationToken = () => {
@@ -51,7 +50,6 @@ export async function getData(url_enpoint = "") {
     }
     const data = await response.json();
     // debugger;
-    console.log("getData-data: ", data);
     return data;
   } catch (error) {
     console.error(

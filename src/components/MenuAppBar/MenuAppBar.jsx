@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import { setStatusFilter } from "./../../redux/contacts/operations";
-import { NavLink, Outlet, RouterLink, useNavigate } from "react-router-dom";
+import { NavLink, Outlet, useNavigate } from "react-router-dom";
 import { logout } from "../../redux/auth/operations";
 import { selectIsLoggedIn, selectUserName } from "../../redux/auth/selectors";
 import * as React from "react";
@@ -13,18 +13,14 @@ import MenuIcon from "@mui/icons-material/Menu";
 import LoginIcon from "@mui/icons-material/Login";
 import LogoutIcon from "@mui/icons-material/Logout";
 import SearchIcon from "@mui/icons-material/Search";
-import Switch from "@mui/material/Switch";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import FormGroup from "@mui/material/FormGroup";
+
 import MenuItem from "@mui/material/MenuItem";
 import Menu from "@mui/material/Menu";
 
-import BottomNavigation from "@mui/material/BottomNavigation";
 import BottomNavigationAction from "@mui/material/BottomNavigationAction";
 import { Container } from "./MenuAppBar.Styled";
 import { alpha, styled } from "@mui/material/styles";
 import InputBase from "@mui/material/InputBase";
-import { menuItemClasses } from "@mui/base";
 
 const settingsUnAuth = ["Home", "Contacts", "Register"];
 const settingsAuth = ["Home", "Contacts", "New contact"];
@@ -59,7 +55,6 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   color: "inherit",
   "& .MuiInputBase-input": {
     padding: theme.spacing(1, 1, 1, 0),
-    // vertical padding + font size from searchIcon
     paddingLeft: `calc(1em + ${theme.spacing(4)})`,
     transition: theme.transitions.create("width"),
     width: "100%",
@@ -72,15 +67,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 let selectMenuItem;
 
 const UnauthorizedNav = () => {
-  const dispatch = useDispatch();
   const nav = useNavigate();
-  // let selectMenuItem ;
-  const handleChangeInput = (evt) => {
-    evt.preventDefault();
-    const filter = evt.currentTarget.value;
-    // setFilter(filter);
-    dispatch(setStatusFilter(filter));
-  };
 
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
@@ -92,15 +79,10 @@ const UnauthorizedNav = () => {
     setAnchorElUser(event.currentTarget);
   };
 
-  const handleCloseNavMenu = () => {
-    setAnchorElNav(null);
-  };
-
   const handleCloseUserMenu = (evt) => {
     evt.preventDefault();
     setAnchorElUser(null);
     selectMenuItem = evt.currentTarget.textContent;
-    console.log("handleCloseUserMenu: ", selectMenuItem);
     switch (selectMenuItem) {
       case "Home":
         nav("/");
@@ -122,10 +104,6 @@ const UnauthorizedNav = () => {
 
   return (
     <>
-      {/*<NavLink to="/">Home</NavLink>
-      <NavLink to="/register">Register</NavLink>
-      <NavLink to="/login">Login</NavLink>*/}
-
       <Box sx={{ flexGrow: 1 }}>
         <AppBar position="static">
           <Toolbar>
@@ -204,25 +182,24 @@ const AuthorizedNav = () => {
     dispatch(setStatusFilter(filter));
   };
 
-  const [anchorElNav, setAnchorElNav] = React.useState(null);
+  // const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
 
-  const handleOpenNavMenu = (event) => {
-    setAnchorElNav(event.currentTarget);
-  };
+  // const handleOpenNavMenu = (event) => {
+  //   setAnchorElNav(event.currentTarget);
+  // };
   const handleOpenUserMenu = (event) => {
     setAnchorElUser(event.currentTarget);
   };
 
-  const handleCloseNavMenu = () => {
-    setAnchorElNav(null);
-  };
+  // const handleCloseNavMenu = () => {
+  //   setAnchorElNav(null);
+  // };
 
   const handleCloseUserMenu = (evt) => {
     evt.preventDefault();
     setAnchorElUser(null);
     selectMenuItem = evt.currentTarget.textContent;
-    console.log("handleCloseUserMenu: ", selectMenuItem);
     switch (selectMenuItem) {
       case "Home":
         nav("/");
@@ -241,11 +218,6 @@ const AuthorizedNav = () => {
 
   return (
     <>
-      {/*<NavLink to="/">Home</NavLink>
-      <NavLink to="/contacts">Contacts</NavLink>
-      Welcome {userName}
-      <button onClick={handleLogout}>Logout</button>*/}
-
       <Box sx={{ flexGrow: 1 }}>
         <AppBar position="static" color="secondary" enableColorOnDark={true}>
           <Toolbar>
@@ -298,7 +270,11 @@ const AuthorizedNav = () => {
             </Search>
 
             <div>
-              <Typography variant="h6" component="div" sx={{ flexGrow: 0, mr: 1  }}>
+              <Typography
+                variant="h6"
+                component="div"
+                sx={{ flexGrow: 0, mr: 1 }}
+              >
                 {userName}
               </Typography>
             </div>
@@ -308,13 +284,13 @@ const AuthorizedNav = () => {
                 Logout
               </Typography>
             </div>
-              <BottomNavigationAction
-                sx={{ minWidth: 0, maxWidth: 52 }}
-                label="Logout"
-                value="logout"
-                icon={<LogoutIcon sx={{ color: "white" }} />}
-                onClick={handleLogout}
-              />
+            <BottomNavigationAction
+              sx={{ minWidth: 0, maxWidth: 52 }}
+              label="Logout"
+              value="logout"
+              icon={<LogoutIcon sx={{ color: "white" }} />}
+              onClick={handleLogout}
+            />
           </Toolbar>
         </AppBar>
       </Box>

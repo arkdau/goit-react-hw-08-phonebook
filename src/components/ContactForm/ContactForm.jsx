@@ -12,29 +12,19 @@ import { createTheme, TextField } from "@mui/material";
 import { ThemeProvider } from "@mui/material/styles";
 import PersonOutlineIcon from "@mui/icons-material/PersonOutline";
 import PhoneEnabledIcon from "@mui/icons-material/PhoneEnabled";
-import { useEffect, useMemo } from "react";
+import { useMemo } from "react";
 
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
-import { toast, ToastContainer } from "react-toastify";
+import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import {
   fetchAddContacts,
   fetchUpdateContacts,
 } from "./../../redux/contacts/operations";
-import css from "./Contacts.module.css";
-import { styled } from "styled-components";
-import { useNavigate, useParams, useSearchParams } from "react-router-dom";
 
-const FormContainer = styled.div`
-display: flex;
-justify-content: center;
-align-items: center;
-`;
+import { useParams } from "react-router-dom";
 
-////////////////////////////////////////////
-// const initialValues = { nameFirst: "", nameLast: "", number: "" };
-// ====== Validation ========= //
 const ContactsSchema = Yup.object().shape({
   nameFirst: Yup.string().required("* Name First is required"),
   nameLast: Yup.string().required("* Name Last is required"),
@@ -43,11 +33,8 @@ const ContactsSchema = Yup.object().shape({
 
 function ContactForm() {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
 
   const { contacts } = useSelector((state) => state.contacts);
-
-  const notify = (name) => toast.warning(`${name} is already in contacts !`);
 
   const checkItem = (name) => {
     return contacts.filter((item) => item.name.includes(name));
@@ -58,13 +45,9 @@ function ContactForm() {
   let NameFirst = "";
   let NameLast = "";
   let number;
-  // let initialValues = { name: "", number: "" };
   let isUpdateContact = false;
-  console.log("userId: ", id);
 
   let curString = "";
-  console.log("userId: ", id);
-  console.log("form-contact: ", contacts);
   if (id) {
     isUpdateContact = true;
     curContact = contacts.filter((item) => item.id.includes(id));
@@ -72,41 +55,29 @@ function ContactForm() {
     number = curContact[0].number;
     NameFirst = curString[0];
     NameLast = curString[1];
-
-    console.log("curString: ", curString);
-    console.log("Name First: ", NameFirst);
-
-    console.log("Name Last ", NameLast);
   } else {
     isUpdateContact = false;
   }
 
-  //   const initialValues = {
-  //   nameFirst: curContact[0] ? curContact[0].name : '',
-  //   nameLast:  curContact[0] ? curContact[0].name : '',
-  //   number:    curContact[0] ? curContact[0].number : '',
-  // };
-
   const initialValues = {
     nameFirst: NameFirst ? NameFirst : "",
-    nameLast:  NameLast  ? NameLast  : "",
-    number:    number    ? number    : "",
+    nameLast: NameLast ? NameLast : "",
+    number: number ? number : "",
   };
 
-  const handleSubmit = (values, { resetForm }) => {
+  const handleSubmit = (values) => {
     const name = `${values.nameFirst} ${values.nameLast}`;
     const number = `${values.number}`;
 
-    if (checkItem(name).length != 0) {
+    if (checkItem(name).length !== 0) {
       return alert(`${name} is already in contacts`);
     }
 
-    if (checkItem(number).length != 0) {
+    if (checkItem(number).length !== 0) {
       return alert(`${number} is already in contacts`);
     }
 
     if (isUpdateContact) {
-      console.log("isUpdateContact");
       dispatch(
         fetchUpdateContacts({
           contact: { "name": name, "number": number },
@@ -126,39 +97,11 @@ function ContactForm() {
         icon: "✅",
       },
     );
-    // resetForm();
   };
 
-  // MUI Theme
-  // const mode = userTheme;
   let theme = useMemo(() => {
     return createTheme({});
   }, []);
-
-  //   <FormContainer>
-  //   <form className={css.formBox} onSubmit={handleSubmit}>
-  //     <p>Name</p>
-  //     <input
-  //       type="text"
-  //       name="name"
-  //       title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
-  //       required
-  //     />
-  //     <p>Number</p>
-  //     <input
-  //       type="tel"
-  //       name="number"
-  //       pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
-  //       title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
-  //       required
-  //     />
-  //     <button type="submit">Add contact</button>
-  //   </form>
-  // </FormContainer>
-  //
-  // <div>
-  //   <ToastContainer />
-  // </div>
 
   return (
     <Wrapper onSubmit={handleSubmit}>

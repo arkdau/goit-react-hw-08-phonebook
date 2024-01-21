@@ -10,7 +10,6 @@ export const register = createAsyncThunk(
   async (credentials, thunkAPI) => {
     try {
       const resp = await postData("users/signup", credentials);
-      console.log("resp: ", resp);
       setAuthorizationToken(resp.token);
       return resp;
     } catch (err) {
@@ -24,7 +23,6 @@ export const login = createAsyncThunk(
   async (credentials, thunkAPI) => {
     try {
       const resp = await postData("users/login", credentials);
-      console.log("resp: ", resp);
       setAuthorizationToken(resp.token);
       return resp;
     } catch (err) {
@@ -36,7 +34,6 @@ export const login = createAsyncThunk(
 export const logout = createAsyncThunk("/users/logout", async (_, thunkAPI) => {
   try {
     const resp = await postData("users/logout");
-    console.log("resp: ", resp);
     setAuthorizationToken("");
     return resp;
   } catch (err) {

@@ -5,26 +5,13 @@ import { Contact } from "./../Contact/Contact";
 import { fetchContacts } from "./../../redux/contacts/operations";
 import styled from "styled-components";
 import {
-  // ButtonsWrapper,
-  // DeleteBtn,
-  // EditBtn,
-  // Name,
   Table,
-  // TableDataName,
-  // TableDataNumber,
   TableHor,
   TableRaw,
   TableRawContent,
   Thead,
   TotalContacts,
 } from "./ContactList.Styled";
-
-// const ListContainer = styled.div`
-// margin: 0 360px 0 360px;
-// // display: flex;
-// // justify-content: center;
-// // align-items: center;
-// `;
 
 const MsgContainer = styled.div`
 display: flex;
@@ -68,7 +55,6 @@ function ContactList() {
 
   const handleContactDetailsClick = (contactId) => {
     // navigate(`contact/${contactId}`, { state: stateItem });
-    console.log("handleContactDetailsClick-contactId: ", contactId);
   };
 
   const contactsAmount = 4;
@@ -101,19 +87,6 @@ function ContactList() {
         </tbody>
       </Table>
 
-      {
-        /*<ListContainer>
-        <ul>
-          {(visibleContacts || []).map((item) => {
-            return (
-              <li key={item.id}>
-                <Contact contact={item} />
-              </li>
-            );
-          })}
-        </ul>
-      </ListContainer>*/
-      }
       <MsgContainer>
         {isLoading ? <div>Loading ...</div> : ""}
         {error ? <div>Error Nerwork ...</div> : ""}

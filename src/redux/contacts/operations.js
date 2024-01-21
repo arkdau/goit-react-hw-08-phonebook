@@ -44,7 +44,6 @@ export const fetchUpdateContacts = createAsyncThunk(
   "contacts/fetch/update",
   async (data, thunkAPI) => {
     try {
-      console.log("fetchUpdate-id: ", data.id);
       const resp = await  patchData(`contacts/${data.id}`, data.contact)
       return resp;
     } catch (err) {
