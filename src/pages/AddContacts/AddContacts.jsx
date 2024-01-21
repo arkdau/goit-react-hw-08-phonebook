@@ -9,7 +9,7 @@
      <Wrapper>
        <h2>Create Contact</h2>
        <AvatarWrapper>
-         <BackBtn to="/">
+         <BackBtn to="/contacts">
            <TbArrowBackUp size={'30px'} />
          </BackBtn>
          <AccountCircleIcon sx={{ fontSize: '210px', color: '#e5e5e5' }} />

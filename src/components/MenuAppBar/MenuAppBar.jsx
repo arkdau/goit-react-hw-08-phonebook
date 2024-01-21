@@ -122,9 +122,9 @@ const UnauthorizedNav = () => {
 
   return (
     <>
-      <NavLink to="/">Home</NavLink>
+      {/*<NavLink to="/">Home</NavLink>
       <NavLink to="/register">Register</NavLink>
-      <NavLink to="/login">Login</NavLink>
+      <NavLink to="/login">Login</NavLink>*/}
 
       <Box sx={{ flexGrow: 1 }}>
         <AppBar position="static">
@@ -168,21 +168,17 @@ const UnauthorizedNav = () => {
               {selectMenuItem}
             </Typography>
 
+            <Typography variant="h6" component="div" sx={{ flexGrow: 0 }}>
+              Login
+            </Typography>
+
             <NavLink to="/login">
-              <div>
-                <BottomNavigation
-                  // sx={{ width: 500 }}
-                  sx={{ bgcolor: "inherit", color: "white" }}
-                  // value={value}
-                  // onChange={}
-                >
-                  <BottomNavigationAction
-                    label="Login"
-                    value="login"
-                    icon={<LoginIcon sx={{ color: "white" }} />}
-                  />
-                </BottomNavigation>
-              </div>
+              <BottomNavigationAction
+                sx={{ minWidth: 0, maxWidth: 52 }}
+                label="Login"
+                value="login"
+                icon={<LoginIcon sx={{ color: "white" }} />}
+              />
             </NavLink>
           </Toolbar>
         </AppBar>
@@ -245,11 +241,10 @@ const AuthorizedNav = () => {
 
   return (
     <>
-      <NavLink to="/">Home</NavLink>
-      {/*<NavLink to="/tasks">Tasks</NavLink>*/}
+      {/*<NavLink to="/">Home</NavLink>
       <NavLink to="/contacts">Contacts</NavLink>
       Welcome {userName}
-      <button onClick={handleLogout}>Logout</button>
+      <button onClick={handleLogout}>Logout</button>*/}
 
       <Box sx={{ flexGrow: 1 }}>
         <AppBar position="static" color="secondary" enableColorOnDark={true}>
@@ -303,27 +298,23 @@ const AuthorizedNav = () => {
             </Search>
 
             <div>
-              <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+              <Typography variant="h6" component="div" sx={{ flexGrow: 0, mr: 1  }}>
                 {userName}
               </Typography>
             </div>
 
-            {/*<NavLink to="/login">*/}
             <div>
-              <BottomNavigation
-                // sx={{ width: 500 }}
-                sx={{ bgcolor: "inherit", color: "white" }}
-                // value={value}
-                onClick={handleLogout}
-              >
-                <BottomNavigationAction
-                  label="Logout"
-                  value="logout"
-                  icon={<LogoutIcon sx={{ color: "white" }} />}
-                />
-              </BottomNavigation>
+              <Typography variant="h6" component="div" sx={{ flexGrow: 1.5 }}>
+                Logout
+              </Typography>
             </div>
-            {/*</NavLink>*/}
+              <BottomNavigationAction
+                sx={{ minWidth: 0, maxWidth: 52 }}
+                label="Logout"
+                value="logout"
+                icon={<LogoutIcon sx={{ color: "white" }} />}
+                onClick={handleLogout}
+              />
           </Toolbar>
         </AppBar>
       </Box>

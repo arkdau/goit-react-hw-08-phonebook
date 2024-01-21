@@ -56,46 +56,42 @@ function ContactForm() {
   let { id } = useParams();
   let curContact = [];
   let NameFirst = "";
-  let NameLast ="";
+  let NameLast = "";
   let number;
   // let initialValues = { name: "", number: "" };
   let isUpdateContact = false;
   console.log("userId: ", id);
 
-  // useEffect(() => {
-    let curString = "";
-    console.log("userId: ", id);
-    console.log("form-contact: ", contacts);
-    if (id) {
-      isUpdateContact = true;
-      curContact = contacts.filter((item) => item.id.includes(id));
-      curString = curContact[0].name.split(" ");
-      number = curContact[0].number;
-      NameFirst = curString[0];
-      NameLast = curString[1];
+  let curString = "";
+  console.log("userId: ", id);
+  console.log("form-contact: ", contacts);
+  if (id) {
+    isUpdateContact = true;
+    curContact = contacts.filter((item) => item.id.includes(id));
+    curString = curContact[0].name.split(" ");
+    number = curContact[0].number;
+    NameFirst = curString[0];
+    NameLast = curString[1];
 
-      console.log("curString: ", curString);
-      console.log("Name First: ", NameFirst);
+    console.log("curString: ", curString);
+    console.log("Name First: ", NameFirst);
 
-      console.log("Name Last ", NameLast);
-    } else {
-      isUpdateContact = false;
-    }
+    console.log("Name Last ", NameLast);
+  } else {
+    isUpdateContact = false;
+  }
 
-  // }, []);
-
-  // const initialValues = {
-  //   nameFirst: NameFirst,
-  //   nameLast: NameLast,
-  //   number: number,
+  //   const initialValues = {
+  //   nameFirst: curContact[0] ? curContact[0].name : '',
+  //   nameLast:  curContact[0] ? curContact[0].name : '',
+  //   number:    curContact[0] ? curContact[0].number : '',
   // };
 
   const initialValues = {
-  nameFirst: curContact[0] ? curContact[0].name : '',
-  nameLast:  curContact[0] ? curContact[0].name : '',
-  number:    curContact[0] ? curContact[0].number : '',
-};
-
+    nameFirst: NameFirst ? NameFirst : "",
+    nameLast:  NameLast  ? NameLast  : "",
+    number:    number    ? number    : "",
+  };
 
   const handleSubmit = (values, { resetForm }) => {
     const name = `${values.nameFirst} ${values.nameLast}`;
