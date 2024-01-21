@@ -65,7 +65,7 @@ function ContactForm() {
     number: number ? number : "",
   };
 
-  const handleSubmit = (values) => {
+  const handleSubmit = (values, { resetForm }) => {
     const name = `${values.nameFirst} ${values.nameLast}`;
     const number = `${values.number}`;
 
@@ -97,6 +97,7 @@ function ContactForm() {
         icon: "✅",
       },
     );
+    resetForm();
   };
 
   let theme = useMemo(() => {

@@ -57,7 +57,7 @@ function ContactList() {
     // navigate(`contact/${contactId}`, { state: stateItem });
   };
 
-  const contactsAmount = 4;
+  const contactsAmount = contacts.length;
 
   return (
     <>
