@@ -24,7 +24,7 @@ import ContactEdit from "pages/ContactEdit/ContactEdit";
 
 function App() {
   const dispatch = useDispatch();
-  const { contacts } = useSelector((state) => state.contacts);
+  // const { contacts } = useSelector((state) => state.contacts);
   // const userTheme = useSelector(selectTheme);
   const userTheme = "light";
 
