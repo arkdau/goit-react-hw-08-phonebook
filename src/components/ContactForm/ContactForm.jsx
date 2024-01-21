@@ -51,7 +51,11 @@ function ContactForm() {
   if (id) {
     isUpdateContact = true;
     curContact = contacts.filter((item) => item.id.includes(id));
-    curString = curContact[0].name.split(" ");
+    const strName = curContact[0].name;
+    // console.log(strName);
+    // curString = curContact[0].name.split(" ");
+    curString = strName.split(" ");
+    // console.log(curString);
     number = curContact[0].number;
     NameFirst = curString[0];
     NameLast = curString[1];
