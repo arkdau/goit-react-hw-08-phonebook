@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import { setStatusFilter } from "./../../redux/contacts/operations";
-import { NavLink, Outlet, useNavigate } from "react-router-dom";
+import { NavLink, Outlet, useLocation, useNavigate } from "react-router-dom";
 import { logout } from "../../redux/auth/operations";
 import { selectIsLoggedIn, selectUserName } from "../../redux/auth/selectors";
 import * as React from "react";
@@ -24,6 +24,13 @@ import InputBase from "@mui/material/InputBase";
 
 const settingsUnAuth = ["Home", "Contacts", "Register"];
 const settingsAuth = ["Home", "Contacts", "New contact"];
+
+// custom hook to get the current pathname in React
+
+const usePathname = () => {
+  const location = useLocation();
+  return location.pathname;
+};
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -216,6 +223,9 @@ const AuthorizedNav = () => {
     }
   };
 
+
+  console.log(usePathname());
+
   return (
     <>
       <Box sx={{ flexGrow: 1 }}>
@@ -258,16 +268,18 @@ const AuthorizedNav = () => {
             <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
               {selectMenuItem}
             </Typography>
-            <Search>
-              <SearchIconWrapper>
-                <SearchIcon />
-              </SearchIconWrapper>
-              <StyledInputBase
-                placeholder="Search…"
-                inputProps={{ "aria-label": "search" }}
-                onChange={handleChangeInput}
-              />
-            </Search>
+            {(usePathname().localeCompare("/contacts") === 0) && (
+              <Search>
+                <SearchIconWrapper>
+                  <SearchIcon />
+                </SearchIconWrapper>
+                <StyledInputBase
+                  placeholder="Search…"
+                  inputProps={{ "aria-label": "search" }}
+                  onChange={handleChangeInput}
+                />
+              </Search>
+            )}
 
             <div>
               <Typography

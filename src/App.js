@@ -42,7 +42,11 @@ function App() {
       <div className="App">
         <Routes>
           <Route path="/" element={<UserMenu />}>
-            <Route index element={<Home />} />
+            {/*}<Route index element={<Home />} />*/}
+            <Route
+              index
+              element={<RestrictedRoute component={Home} path="/contacts" />}
+            />
 
             <Route
               path="register"
